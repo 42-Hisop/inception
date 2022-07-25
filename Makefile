@@ -9,15 +9,15 @@ all : run
 
 run : 
 	@echo "$(GREEN) Volumes Build ... $(RESET)"
-	@mkdir -p ~/inception_vol/data/mariadb
-	@mkdir -p ~/inception_vol/data/wordpress
+	@mkdir -p ~/vol/data/mariadb
+	@mkdir -p ~/vol/data/wordpress
 	@echo "$(GREEN) container Build ... $(RESET)"
 	@docker-compose -f $(yml) up --build
 
 up :
 	@echo "$(GREEN) Volumes Build ... $(RESET)"
-	@mkdir -p ~/inception_vol/data/mariadb
-	@mkdir -p ~/inception_vol/data/wordpress
+	@mkdir -p ~/vol/data/mariadb
+	@mkdir -p ~/vol/data/wordpress
 	@echo "$(GREEN) container Build ... $(RESET)"
 	@docker-compose -f $(yml) up -d --build
 
@@ -30,14 +30,14 @@ list_vol :
 	docker volume ls
 
 fclean :
+	@docker-compose -f $(yml) down --volumes --rmi all
+	#@echo "$(RED) Clean volumes ... $(RESET)"
+	#@docker volume rm -f $$(docker volume ls -q)
+	@rm -rf ~/vol/data
+	#@echo "$(RED) Clean images ...$(RESET)"
+	#@docker rmi -f $$(docker images -q)
 	@docker system prune -f
-	@echo "$(RED) Clean volumes ... $(RESET)"
-	@docker volume rm -f $$(docker volume ls -q)
-	@rm -rf ~/inception_vol/data/mariadb
-	@rm -rf ~/inception_vol/data/wordpress
-	@docker-compose -f $(yml) down
-	@echo "$(RED) Clean images ...$(RESET)"
-	@docker rmi -f $$(docker images -q)
+	@docker run --rm -it -v src_mariadb_data:/docker debian:buster rm -rf docker/*
 
 
 .PHONY : all run up list list_volumes clean

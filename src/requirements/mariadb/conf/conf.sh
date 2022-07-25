@@ -1,4 +1,4 @@
-if [ ! -d /var/lib/mysql/wordpress ]; then
+if [ ! -d /var/lib/mysql/${MARIADB_DATABASE}]; then
     mysqld &
     until mysqladmin ping; do
         sleep 2
