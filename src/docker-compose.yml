@@ -44,12 +44,12 @@ volumes:
     driver: local
     driver_opts: 
       type: none
-      device: /Users/hisop/vol/data/mariadb
+      device: /Users/hisop/in_vol/data/mariadb
       o: bind
 
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /Users/hisop/vol/data/wordpress
+      device: /Users/hisop/in_vol/data/wordpress
       o: bind
