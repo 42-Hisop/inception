@@ -8,7 +8,7 @@ RUN		mkdir -p /etc/nginx/ssl
 RUN		openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 		-out /etc/nginx/ssl/nginx.crt \
 		-keyout /etc/nginx/ssl/nginx.key \
-		-subj "/C=KR/ST=Seoul/L=Dongdaemoon/O=42/CN=khee-seo.42.fr/"
+		-subj "/C=KR/ST=Seoul/L=Seoul/O=42/CN=khee-seo.42.fr/"
 
 COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
 
